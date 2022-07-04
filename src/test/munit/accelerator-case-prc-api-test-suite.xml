@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="accelerator-servicenow-sys-api-test-suite.xml" />
+	<munit:test name="accelerator-case-prc-api-mainTest" doc:id="9f53b936-8652-4b38-9205-af788d0fb9a6" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="3a83d7a6-61c8-4e65-935f-c0fe0dc2874d" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="accelerator-case-prc-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to accelerator-case-prc-api-test-suite-main" doc:id="e4b64e45-14a2-4596-a4b1-f48bf2c51900" name="accelerator-case-prc-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="423140ef-6b14-4a54-81d5-308fe4207947" is="#[MunitTools::notNullValue()]" expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="accelerator-case-prc-api-test-NOTFOUND" doc:id="c571d4ae-5c27-4aac-bcaa-9bedfdc4c197" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="eeebcb66-a0b1-4101-9436-2b9ddf8990a8" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="accelerator-case-prc-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="8e9bfcc2-f666-45db-9587-03dec9f28614" >
+				<flow-ref doc:name="Flow Reference" doc:id="eda118b2-b9df-46b5-898f-747d2797c668" name="accelerator-case-prc-api-main" />
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="1ea39d9f-3939-4eb3-9e4b-778db4d36f32" >
+						<logger level="INFO" doc:name="Logger" doc:id="c301f57e-0d6a-4433-a079-fbe5c73f31b2" message="#[payload]"/>
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="b364664a-c51e-4c15-a439-09621005264e" actual="#[payload]" expected='#[{message: "Resource not found"}]'/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="accelerator-servicenow-BADREQUEST" doc:id="cd019f29-b7f8-471f-8d64-ec88b370e5ae" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="74534a4f-fe9d-42b5-87a7-14ff473f88f2" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="accelerator-case-prc-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:BAD_REQUEST" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="a35267a8-3003-4cfb-9d41-2aa4ee93e3f3" >
+				<flow-ref doc:name="Flow Reference" doc:id="f39dce42-a088-4f46-9e56-6a0e58f2047b" name="accelerator-case-prc-api-main"/>
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="01fb89d5-f6e2-4985-a3d0-aee28bf7b3bf" >
+						<logger level="INFO" doc:name="Logger" doc:id="74df7acb-2176-48bf-8c50-b301a3f23e2c" message="#[payload]"/>
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="bb775503-28f9-4d57-acee-4cae0e9228f1" actual="#[payload]" expected='#[{message: "Bad request"}]'/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="accelerator-case-prc-api-METHOD_NOT_ALLOWED" doc:id="9ce6e2ab-f98f-4f54-b6b0-4ef779a2fbec" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="5ccefe26-30c6-4c77-aec2-3f3eaddc69bf" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="accelerator-case-prc-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:METHOD_NOT_ALLOWED" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="440b2861-64b8-47b4-93e9-eca1f3498501" >
+				<flow-ref doc:name="Flow Reference" doc:id="8f7208ee-596b-49a4-91fe-7a14b9240ac0" name="accelerator-case-prc-api-main"/>
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="5576b2d5-19a3-44d7-82fd-ded72153e9a1" >
+						<logger level="INFO" doc:name="Logger" doc:id="ffef5b14-9f91-4626-8c46-331e6922008e" message="#[payload]"/>
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="60d41912-a0d2-48db-b8f7-fec7478e1b94" expected='#[{message: "Method not allowed"}]' actual="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="accelerator-case-prc-api-test-UNSUPPORTED_MEDIA_TYPE" doc:id="8567cd36-0c7b-4f17-a97f-583cef776f2e" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="76b0e15c-9179-436e-9bcd-e1e24bb71d6d" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="accelerator-case-prc-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:UNSUPPORTED_MEDIA_TYPE" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="f1b2c2d1-5077-4c97-87c5-283188e72a9d" >
+				<flow-ref doc:name="Flow Reference" doc:id="5a9efb99-203f-4640-9dd2-e37fa812c10d" name="accelerator-case-prc-api-main"/>
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="f6845d4a-30e8-464f-8730-09a088f7d232" >
+						<logger level="INFO" doc:name="Logger" doc:id="be3d5f9f-c7aa-49c9-ae1e-7a8fe1a911d4" message="#[payload]"/>
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="c1f92706-f4b3-402e-9350-72e881046483" actual="#[payload]" expected='#[{message: "Unsupported media type"}]'/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="accelerator-case-prc-api-console-test-NOT_IMPLEMENTED" doc:id="01f07a92-741c-42d3-8213-013d8be50cf3" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="c9194cb1-f7c5-4db3-a074-c06d33c84fba" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="accelerator-case-prc-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_IMPLEMENTED" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="fa054272-0b32-4e44-88a2-7736ff33a13e" >
+				<flow-ref doc:name="Flow Reference" doc:id="9355bb89-c836-4993-9f3d-c9344ce1ac89" name="accelerator-case-prc-api-main"/>
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="89dff458-4508-44de-8511-0e42a1a93dbc" >
+						<logger level="INFO" doc:name="Logger" doc:id="dba1541d-09d2-4ada-874e-395de6096f99" message="#[payload]"/>
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="b3c06846-17f6-4bce-9d90-c5658f9d1532" actual="#[payload]" expected='#[{message: "Not Implemented"}]'/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="accelerator-case-prc-api-console-api-consoleTest" doc:id="c7ef2b27-9c8d-48e1-a442-adbfb1b7aa27" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="49c91baf-221c-4a7e-8a22-be67cd0b1631" processor="apikit:console">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="accelerator-case-prc-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to accelerator-case-prc-api-console" doc:id="56c88535-bd54-466a-8554-58931e4cd8a9" name="accelerator-case-prc-api-console"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="7805116d-8e4c-4902-a19a-033377a6a2c0" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="accelerator-case-prc-api-APIKIT:NOT_FOUND" doc:id="5a305b8a-1bf0-4dd8-a33c-70c762ac667b" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="e8df8a47-e1b8-4d74-b3f6-3c01a5c9513a" processor="apikit:console">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="accelerator-case-prc-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="d78f33ca-d95e-4416-99bc-137fd3a8700b" >
+				<flow-ref doc:name="Flow Reference" doc:id="0a59c24e-4a25-4f94-ba38-9e109e38c314" name="accelerator-case-prc-api-console" />
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="b9a40290-4b45-45ef-b9ae-23f01a58dd2a" >
+						<logger level="INFO" doc:name="Logger" doc:id="6c1f822b-3673-403d-a294-1b7577b34915" message="#[payload]"/>
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="5baaede8-c403-4a2f-a604-b8c8a0de0200" actual="#[payload]" expected='#[{message: "Resource not found"}]'/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="accelerator-servicenow-sys-api-test-suiteTest-console-APIKIT:NOT_ACCEPTABLE" doc:id="95bbc2b4-c116-4734-a36c-11bb8a3ab06f" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="0f937d92-cbab-450c-96dc-52d08037e572" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="accelerator-case-prc-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_ACCEPTABLE" />
+				</munit-tools:then-return>
+			
+</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="7c2de187-3473-46ae-a973-1b23114c3201" >
+				<flow-ref doc:name="Flow Reference" doc:id="e5ccd511-c54d-4b6f-84a4-4e119463f60e" name="accelerator-case-prc-api-main"/>
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="663f11f2-14e8-4ba1-b6d2-a70bfbb2a49e" >
+						<logger level="INFO" doc:name="Logger" doc:id="280fbc81-a927-48c0-afec-22aba35fe448" />
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="1f97bf32-e446-40c4-b659-a05f3d7d1adf" actual="#[payload]" expected='#[{message: "Not acceptable"}]'/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

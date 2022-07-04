@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd">
+	<sub-flow name="sfdc-case_sfdc-case-lookup" doc:id="e8075be3-d148-4a7f-b370-97742adeaf6c" >
+		<logger level="INFO" doc:name="Before Request" doc:id="3d09c534-853d-476a-9737-abe5a7aad17b" message="${application-msgs.before-connector-call-message}"/>
+		<until-successful maxRetries="${retry.http.numRetries}" doc:name="retry sfdc-sys-api" doc:id="acb010ee-f186-4ed9-9930-e8c52680cf0c" millisBetweenRetries="${retry.http.delayMillisecs}">
+		<try doc:name="Try" doc:id="15efffa0-cf2d-43fd-9daa-0f964d01ae02" >
+				<http:request method="GET" doc:name="Invoke SF System API" doc:id="f625868c-cb00-4899-b377-a7a044737e3e" config-ref="sfdc-sys-api-httpRequestConfig" sendCorrelationId="ALWAYS" path="${sfdc-sys-api.path}" correlationId="#[correlationId]">
+			<http:headers><![CDATA[#[output application/java
+---
+{
+	
+	"Content-Type" : "${sfdc-sys-api.content-type}"
+}]]]></http:headers>
+			<http:uri-params><![CDATA[#[output application/java
+---
+{
+	"caseId" : payload.caseId
+}]]]></http:uri-params>
+		</http:request>
+		<error-handler>
+	<on-error-continue enableNotifications="true"
+		logException="true" doc:name="On Error Continue"
+		doc:id="3d69f2f2-188d-4d3d-88d6-9ed72520eb4b"
+		type="HTTP:BAD_REQUEST, HTTP:CLIENT_SECURITY, HTTP:CONNECTIVITY, HTTP:FORBIDDEN, HTTP:METHOD_NOT_ALLOWED, HTTP:NOT_ACCEPTABLE, HTTP:NOT_FOUND, HTTP:PARSING, HTTP:RETRY_EXHAUSTED, HTTP:SECURITY, HTTP:UNAUTHORIZED, HTTP:UNSUPPORTED_MEDIA_TYPE">
+		<flow-ref doc:name="common-error-handler_http-exception"
+			doc:id="e011eb20-f8a8-4f03-9858-a0972bd1ce96"
+			name="common-error-handler_http-exception" />
+
+	</on-error-continue>
+</error-handler>
+			</try>
+		</until-successful>
+		<logger level="INFO" doc:name="After Request" doc:id="399eb2b6-b68e-439e-b4f8-594c1de1f5aa" message="${application-msgs.after-connector-call-message}"/>
+	</sub-flow>
+</mule>

@@ -1,0 +1,479 @@
+{
+	"info": {
+		"_postman_id": "30bd8a2e-6604-403b-8233-f85fce401de3",
+		"name": "accelerator-case-prc-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Release 1.3",
+			"item": [
+				{
+					"name": "post incident",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "client_id",
+								"type": "text",
+								"value": "2c5babf1f06b4b8fbb8e3a003b2b9383"
+							},
+							{
+								"key": "client_secret",
+								"type": "text",
+								"value": "29d95822bAAa4af38b0799f8e160A810"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"active\": \"false\",\r\n  \"activityDue\": \"\",\r\n  \"caseId\": \"5006g00000JOs92AAD\",\r\n  \"additionalAssigneeList\": \"\",\r\n  \"approval\": \"\",\r\n  \"approvalHistory\": \"\",\r\n  \"approvalSet\": \"\",\r\n  \"assignedTo\": \"\",\r\n  \"assignedGroup\": \"\",\r\n  \"businessDuration\": \"\",\r\n  \"businessService\": \"\",\r\n  \"businessStc\": \"\",\r\n  \"calendarDuration\": \"\",\r\n  \"calendarStc\": \"\",\r\n  \"callerId\": \"\",\r\n  \"category\": \"\",\r\n  \"causedBy\": \"\",\r\n  \"childIncidents\": \"\",\r\n  \"closeNotes\": \"Test\",\r\n  \"closeCode\": \"Test\",\r\n  \"closedAt\": \"\",\r\n  \"closedBy\": \"\",\r\n  \"cmdbCi\": \"\",\r\n  \"comments\": \"\",\r\n  \"commentsAndWorkNotes\": \"\",\r\n  \"company\": \"\",\r\n  \"contactType\": \"\",\r\n  \"correlationDisplay\": \"\",\r\n  \"correlationId\": \"\",\r\n  \"deliveryPlan\": \"\",\r\n  \"deliveryTask\": \"\",\r\n  \"description\": \"\",\r\n  \"dueDate\": \"\",\r\n  \"escalation\": \"\",\r\n  \"expectedStart\": \"\",\r\n  \"followUp\": \"\",\r\n  \"groupList\": \"\",\r\n  \"holdReason\": \"\",\r\n  \"impact\": \"\",\r\n  \"incident_state\": \"\",\r\n  \"knowlegde\": \"false\",\r\n  \"location\": \"\",\r\n  \"madeSla\": \"false\",\r\n  \"notify\": \"\",\r\n  \"number\": \"\",\r\n  \"openedAt\": \"\",\r\n  \"openedBy\": \"\",\r\n  \"order\": \"\",\r\n  \"parent\": \"\",\r\n  \"parentIncident\": \"\",\r\n  \"priority\": \"\",\r\n  \"problemId\": \"\",\r\n  \"reassignmentCount\": \"\",\r\n  \"reopenCount\": \"\",\r\n  \"reopenedBy\": \"\",\r\n  \"reopenedTime\": \"\",\r\n  \"resolvedAt\": \"\",\r\n  \"resolvedBy\": \"\",\r\n  \"rfc\": \"\",\r\n  \"severity\": \"\",\r\n  \"shortDescription\": \"This is a test incident\",\r\n  \"slaDue\": \"\",\r\n  \"state\": \"\",\r\n  \"subCategory\": \"\",\r\n  \"timeWorked\": \"\",\r\n  \"uponApproval\": \"\",\r\n  \"uponReject\": \"\",\r\n  \"urgency\": \"\",\r\n  \"userInput\": \"\",\r\n  \"watchList\": \"\",\r\n  \"workEnd\": \"\",\r\n  \"workNotes\": \"\",\r\n  \"workNotesList\": \"\",\r\n  \"workStart\": \"\",\r\n  \"syncToSNOW\": true\r\n}"
+						},
+						"url": {
+							"raw": "https://{{host_case_prc_api}}/api/case",
+							"protocol": "https",
+							"host": [
+								"{{host_case_prc_api}}"
+							],
+							"path": [
+								"api",
+								"case"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post incident bad request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "client_id",
+								"type": "text",
+								"value": "2c5babf1f06b4b8fbb8e3a003b2b9383"
+							},
+							{
+								"key": "client_secret",
+								"type": "text",
+								"value": "29d95822bAAa4af38b0799f8e160A810"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"active\": \"false\",\r\n  \"activityDue\": \"\",\r\n  \"caseId\": \"ewwq3\",\r\n  \"additionalAssigneeList\": \"\",\r\n  \"approval\": \"\",\r\n  \"approvalHistory\": \"\",\r\n  \"approvalSet\": \"\",\r\n  \"assignedTo\": \"\",\r\n  \"assignedGroup\": \"\",\r\n  \"businessDuration\": \"\",\r\n  \"businessService\": \"\",\r\n  \"businessStc\": \"\",\r\n  \"calendarDuration\": \"\",\r\n  \"calendarStc\": \"\",\r\n  \"callerId\": \"\",\r\n  \"category\": \"\",\r\n  \"causedBy\": \"\",\r\n  \"childIncidents\": \"\",\r\n  \"closeNotes\": \"Test\",\r\n  \"closeCode\": \"Test\",\r\n  \"closedAt\": \"\",\r\n  \"closedBy\": \"\",\r\n  \"cmdbCi\": \"\",\r\n  \"comments\": \"\",\r\n  \"commentsAndWorkNotes\": \"\",\r\n  \"company\": \"\",\r\n  \"contactType\": \"\",\r\n  \"correlationDisplay\": \"\",\r\n  \"correlationId\": \"\",\r\n  \"deliveryPlan\": \"\",\r\n  \"deliveryTask\": \"\",\r\n  \"description\": \"\",\r\n  \"dueDate\": \"\",\r\n  \"escalation\": \"\",\r\n  \"expectedStart\": \"\",\r\n  \"followUp\": \"\",\r\n  \"groupList\": \"\",\r\n  \"holdReason\": \"\",\r\n  \"impact\": \"\",\r\n  \"incident_state\": \"\",\r\n  \"knowlegde\": \"false\",\r\n  \"location\": \"\",\r\n  \"madeSla\": \"false\",\r\n  \"notify\": \"\",\r\n  \"number\": \"\",\r\n  \"openedAt\": \"\",\r\n  \"openedBy\": \"\",\r\n  \"order\": \"\",\r\n  \"parent\": \"\",\r\n  \"parentIncident\": \"\",\r\n  \"priority\": \"\",\r\n  \"problemId\": \"\",\r\n  \"reassignmentCount\": \"\",\r\n  \"reopenCount\": \"\",\r\n  \"reopenedBy\": \"\",\r\n  \"reopenedTime\": \"\",\r\n  \"resolvedAt\": \"\",\r\n  \"resolvedBy\": \"\",\r\n  \"rfc\": \"\",\r\n  \"severity\": \"\",\r\n  \"shortDescription\": \"This is a test incident\",\r\n  \"slaDue\": \"\",\r\n  \"state\": \"\",\r\n  \"subCategory\": \"\",\r\n  \"timeWorked\": \"\",\r\n  \"uponApproval\": \"\",\r\n  \"uponReject\": \"\",\r\n  \"urgency\": \"\",\r\n  \"userInput\": \"\",\r\n  \"watchList\": \"\",\r\n  \"workEnd\": \"\",\r\n  \"workNotes\": \"\",\r\n  \"workNotesList\": \"\",\r\n  \"workStart\": \"\",\r\n  \"syncToSNOW\": true\r\n}"
+						},
+						"url": {
+							"raw": "https://{{host_case_prc_api}}/api/case",
+							"protocol": "https",
+							"host": [
+								"{{host_case_prc_api}}"
+							],
+							"path": [
+								"api",
+								"case"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post issue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "client_id",
+								"type": "text",
+								"value": "2c5babf1f06b4b8fbb8e3a003b2b9383"
+							},
+							{
+								"key": "client_secret",
+								"type": "text",
+								"value": "29d95822bAAa4af38b0799f8e160A810"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"active\": \"false\",\r\n  \"activityDue\": \"\",\r\n  \"caseId\": \"5006g00000I1pEYAAZ\",\r\n  \"additionalAssigneeList\": \"\",\r\n  \"approval\": \"\",\r\n  \"approvalHistory\": \"\",\r\n  \"approvalSet\": \"\",\r\n  \"assignedTo\": \"\",\r\n  \"assignedGroup\": \"\",\r\n  \"businessDuration\": \"\",\r\n  \"businessService\": \"\",\r\n  \"businessStc\": \"\",\r\n  \"calendarDuration\": \"\",\r\n  \"calendarStc\": \"\",\r\n  \"callerId\": \"\",\r\n  \"category\": \"\",\r\n  \"causedBy\": \"\",\r\n  \"childIncidents\": \"\",\r\n  \"closeNotes\": \"Test\",\r\n  \"closeCode\": \"Test\",\r\n  \"closedAt\": \"\",\r\n  \"closedBy\": \"\",\r\n  \"cmdbCi\": \"\",\r\n  \"comments\": \"\",\r\n  \"commentsAndWorkNotes\": \"\",\r\n  \"company\": \"\",\r\n  \"contactType\": \"\",\r\n  \"correlationDisplay\": \"\",\r\n  \"correlationId\": \"\",\r\n  \"deliveryPlan\": \"\",\r\n  \"deliveryTask\": \"\",\r\n  \"description\": \"\",\r\n  \"dueDate\": \"\",\r\n  \"escalation\": \"\",\r\n  \"expectedStart\": \"\",\r\n  \"followUp\": \"\",\r\n  \"groupList\": \"\",\r\n  \"holdReason\": \"\",\r\n  \"impact\": \"\",\r\n  \"incident_state\": \"\",\r\n  \"knowlegde\": \"false\",\r\n  \"location\": \"\",\r\n  \"madeSla\": \"false\",\r\n  \"notify\": \"\",\r\n  \"number\": \"\",\r\n  \"openedAt\": \"\",\r\n  \"openedBy\": \"\",\r\n  \"order\": \"\",\r\n  \"parent\": \"\",\r\n  \"parentIncident\": \"\",\r\n  \"priority\": \"\",\r\n  \"problemId\": \"\",\r\n  \"reassignmentCount\": \"\",\r\n  \"reopenCount\": \"\",\r\n  \"reopenedBy\": \"\",\r\n  \"reopenedTime\": \"\",\r\n  \"resolvedAt\": \"\",\r\n  \"resolvedBy\": \"\",\r\n  \"rfc\": \"\",\r\n  \"severity\": \"\",\r\n  \"shortDescription\": \"This is a test incident\",\r\n  \"slaDue\": \"\",\r\n  \"state\": \"\",\r\n  \"subCategory\": \"\",\r\n  \"timeWorked\": \"\",\r\n  \"uponApproval\": \"\",\r\n  \"uponReject\": \"\",\r\n  \"urgency\": \"\",\r\n  \"userInput\": \"\",\r\n  \"watchList\": \"\",\r\n  \"workEnd\": \"\",\r\n  \"workNotes\": \"\",\r\n  \"workNotesList\": \"\",\r\n  \"workStart\": \"\",\r\n  \"syncToJIRA\": true\r\n}"
+						},
+						"url": {
+							"raw": "https://{{host_case_prc_api}}/api/case",
+							"protocol": "https",
+							"host": [
+								"{{host_case_prc_api}}"
+							],
+							"path": [
+								"api",
+								"case"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post issue bad request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "client_id",
+								"type": "text",
+								"value": "2c5babf1f06b4b8fbb8e3a003b2b9383"
+							},
+							{
+								"key": "client_secret",
+								"type": "text",
+								"value": "29d95822bAAa4af38b0799f8e160A810"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"active\": \"false\",\r\n  \"activityDue\": \"\",\r\n  \"caseId\": \"ewwedd\",\r\n  \"additionalAssigneeList\": \"\",\r\n  \"approval\": \"\",\r\n  \"approvalHistory\": \"\",\r\n  \"approvalSet\": \"\",\r\n  \"assignedTo\": \"\",\r\n  \"assignedGroup\": \"\",\r\n  \"businessDuration\": \"\",\r\n  \"businessService\": \"\",\r\n  \"businessStc\": \"\",\r\n  \"calendarDuration\": \"\",\r\n  \"calendarStc\": \"\",\r\n  \"callerId\": \"\",\r\n  \"category\": \"\",\r\n  \"causedBy\": \"\",\r\n  \"childIncidents\": \"\",\r\n  \"closeNotes\": \"Test\",\r\n  \"closeCode\": \"Test\",\r\n  \"closedAt\": \"\",\r\n  \"closedBy\": \"\",\r\n  \"cmdbCi\": \"\",\r\n  \"comments\": \"\",\r\n  \"commentsAndWorkNotes\": \"\",\r\n  \"company\": \"\",\r\n  \"contactType\": \"\",\r\n  \"correlationDisplay\": \"\",\r\n  \"correlationId\": \"\",\r\n  \"deliveryPlan\": \"\",\r\n  \"deliveryTask\": \"\",\r\n  \"description\": \"\",\r\n  \"dueDate\": \"\",\r\n  \"escalation\": \"\",\r\n  \"expectedStart\": \"\",\r\n  \"followUp\": \"\",\r\n  \"groupList\": \"\",\r\n  \"holdReason\": \"\",\r\n  \"impact\": \"\",\r\n  \"incident_state\": \"\",\r\n  \"knowlegde\": \"false\",\r\n  \"location\": \"\",\r\n  \"madeSla\": \"false\",\r\n  \"notify\": \"\",\r\n  \"number\": \"\",\r\n  \"openedAt\": \"\",\r\n  \"openedBy\": \"\",\r\n  \"order\": \"\",\r\n  \"parent\": \"\",\r\n  \"parentIncident\": \"\",\r\n  \"priority\": \"\",\r\n  \"problemId\": \"\",\r\n  \"reassignmentCount\": \"\",\r\n  \"reopenCount\": \"\",\r\n  \"reopenedBy\": \"\",\r\n  \"reopenedTime\": \"\",\r\n  \"resolvedAt\": \"\",\r\n  \"resolvedBy\": \"\",\r\n  \"rfc\": \"\",\r\n  \"severity\": \"\",\r\n  \"shortDescription\": \"This is a test incident\",\r\n  \"slaDue\": \"\",\r\n  \"state\": \"\",\r\n  \"subCategory\": \"\",\r\n  \"timeWorked\": \"\",\r\n  \"uponApproval\": \"\",\r\n  \"uponReject\": \"\",\r\n  \"urgency\": \"\",\r\n  \"userInput\": \"\",\r\n  \"watchList\": \"\",\r\n  \"workEnd\": \"\",\r\n  \"workNotes\": \"\",\r\n  \"workNotesList\": \"\",\r\n  \"workStart\": \"\",\r\n  \"syncToJIRA\": true\r\n}"
+						},
+						"url": {
+							"raw": "https://{{host_case_prc_api}}/api/case",
+							"protocol": "https",
+							"host": [
+								"{{host_case_prc_api}}"
+							],
+							"path": [
+								"api",
+								"case"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch-case-sucess",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful PATCH request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \n  \"caseId\":\"5003k00000zT3sTAAS\",\n  \"caseNumber\":\"\",\n  \"caseOrigin\":\"\",\n  \"caseOwner\":\"\",\n  \"caseReason\":\"\",  \n  \"contactName\":\"\",\n  \"type\":\"\", \n  \"subject\":\"\",\n  \"active\": \"false\",\n  \"activityDue\": \"\",\n  \"additionalAssigneeList\": \"\",\n  \"approval\": \"\",\n  \"approvalHistory\": \"\",\n  \"approvalSet\": \"\",\n  \"assignedTo\": \"\",\n  \"assignedGroup\": \"\",\n  \"businessDuration\": \"\",\n  \"businessService\": \"\",\n  \"businessStc\": \"\",\n  \"calendarDuration\": \"\",\n  \"calendarStc\": \"0\",\n  \"callerId\": \"\",\n  \"category\": \"\",\n  \"causedBy\": \"\",\n  \"childIncidents\": \"\",\n  \"closeNotes\": \"\",\n  \"closeCode\": \"\",\n  \"closedAt\": \"\",\n  \"closedBy\": \"\",\n  \"cmdbCi\": \"\",\n  \"comments\": \"This is from MUNIT\",\n  \"commentsAndWorkNotes\": \"\",\n  \"company\": \"\",\n  \"contactType\": \"\",\n  \"correlationDisplay\": \"\",\n  \"correlationId\": \"\",\n  \"deliveryPlan\": \"\",\n  \"deliveryTask\": \"\",\n  \"description\": \"\",\n  \"dueDate\": \"\",\n  \"escalation\": \"\",\n  \"expectedStart\": \"\",\n  \"followUp\": \"\",\n  \"groupList\": \"\",\n  \"holdReason\": \"\",\n  \"impact\": \"\",\n  \"incident_state\": \"0\",\n  \"knowlegde\": \"false\",\n  \"location\": \"\",\n  \"madeSla\": \"false\",\n  \"notify\": \"0\",\n  \"number\": \"\",\n  \"openedAt\": \"\",\n  \"openedBy\": \"\",\n  \"order\": \"0\",\n  \"parent\": \"\",\n  \"parentIncident\": \"\",\n  \"priority\": \"0\",\n  \"problemId\": \"\",\n  \"reassignmentCount\": \"0\",\n  \"reopenCount\": \"0\",\n  \"reopenedBy\": \"\",\n  \"reopenedTime\": \"\",\n  \"resolvedAt\": \"\",\n  \"resolvedBy\": \"\",\n  \"rfc\": \"\",\n  \"severity\": \"0\",\n  \"shortDescription\": \"This is a test incident\",\n  \"slaDue\": \"\",\n  \"state\": \"New\",\n  \"subCategory\": \"\",\n  \"timeWorked\": \"\",\n  \"uponApproval\": \"\",\n  \"uponReject\": \"\",\n  \"urgency\": \"0\",\n  \"userInput\": \"\",\n  \"watchList\": \"\",\n  \"workEnd\": \"\",\n  \"workNotes\": \"\",\n  \"workNotesList\": \"\",\n  \"workStart\": \"\",\n  \"source\": \"SNOW\",\n  \"status\": \"New\",\n  \"owner\": \"Albert\",\n  \"lastUpdatedDate\":\"2017-07-21T17:32:28Z\",\n  \"externalComments\": \"From MUNIT\",\n  \"externalStatus\": \"In Progress\",\n  \"externalSystemLastUpdated\": \"10/21/2019\",\n  \"externalOwner\":\"Latest Update\",\n  \"externalPriority\":\"1\"\n   \n}"
+						},
+						"url": {
+							"raw": "https://{{host_case_prc_api}}/api/sfdc-case/5003k00000zT3sTAAS",
+							"protocol": "https",
+							"host": [
+								"{{host_case_prc_api}}"
+							],
+							"path": [
+								"api",
+								"sfdc-case",
+								"5003k00000zT3sTAAS"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch-case-404 not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Invalid PATCH request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([404]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "https://{{host_case_prc_api}}/api/sfdc-case/5003k00000zT3sTAAS",
+							"protocol": "https",
+							"host": [
+								"{{host_case_prc_api}}"
+							],
+							"path": [
+								"api",
+								"sfdc-case",
+								"5003k00000zT3sTAAS"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Release 1.4",
+			"item": [
+				{
+					"name": "Query Health",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{host_case_prc_api}}/api/ping",
+							"protocol": "https",
+							"host": [
+								"{{host_case_prc_api}}"
+							],
+							"path": [
+								"api",
+								"ping"
+							]
+						},
+						"description": "Call ping operation with no parameters"
+					},
+					"response": []
+				},
+				{
+					"name": "Query Health with Dependencies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{host_case_prc_api}}/api/ping?checkDependencies=true",
+							"protocol": "https",
+							"host": [
+								"{{host_case_prc_api}}"
+							],
+							"path": [
+								"api",
+								"ping"
+							],
+							"query": [
+								{
+									"key": "checkDependencies",
+									"value": "true",
+									"description": "Include health of dependencies"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query Health with Invalid Parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{host_case_prc_api}}/api/ping?checkDependencies=true-ish",
+							"protocol": "https",
+							"host": [
+								"{{host_case_prc_api}}"
+							],
+							"path": [
+								"api",
+								"ping"
+							],
+							"query": [
+								{
+									"key": "checkDependencies",
+									"value": "true-ish",
+									"description": "Should not return dependencies"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{accelerator_app_client_secret}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{accelerator_app_client_id}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+
+		{
+			"key": "host_case_prc_api",
+			"value": "accel-case-prc-api-v1-dev.ca-c1.cloudhub.io"
+		}
+	]
+}

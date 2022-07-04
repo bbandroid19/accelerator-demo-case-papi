@@ -1,0 +1,5 @@
+{"minMuleVersion":"4.3.0",
+"secureProperties":["mule.key",
+	"case-prc-api.http-client.client-secret",
+	"anypoint.platform.client_secret"]
+}

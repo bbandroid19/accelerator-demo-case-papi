@@ -1,0 +1,23 @@
+{
+  "caseId": "5005g000001VzTEAA0",
+  "caseNumber": "00001028",
+  "contactName": "tester",
+  "subject": "This is a test case",
+  "active": "true",
+  "comments": "This is an example incident",
+  "commentsAndWorkNotes": "This is an Example Incident",
+  "description": "This is a test incident from sfdc",
+  "incidentState": "1",
+  "openedBy": "Admin",
+  "priority": "High",
+  "severity": "0",
+  "shortDescription": "This is a test incident",
+  "state": "New",
+  "urgency": "0",
+  "lastUpdatedDate": "2017-07-21T17:32:28Z",
+  "externalComments": "This is test",
+  "externalStatus": "In Progress",
+  "externalSystemLastUpdated": "2021-09-21",
+  "externalOwner": "Tester",
+  "externalPriority": "High"
+}
